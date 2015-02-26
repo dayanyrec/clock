@@ -25,7 +25,8 @@ function setSize (canvas) {
 }
 
 function drawClock (ctx, x, y) {
-	var r = 0.7 * y;
+	var r = 0.7 * y,
+		numbersAngle = 2 * Math.PI / 12;
 
 	ctx.beginPath();
 	// draw outer circle
@@ -48,4 +49,17 @@ function drawClock (ctx, x, y) {
 
 	// stroke the path
 	ctx.stroke();
+
+	// draw numbers
+	ctx.font = 'bold 14px Arial';
+	ctx.textAlign = 'center';
+	ctx.textBaseline = 'middle';
+
+	ctx.save();
+	ctx.rotate(numbersAngle);
+	for (i = 1; i <= 12; i++) {
+		ctx.fillText(i, 0, - r + 20);
+		ctx.rotate(numbersAngle);
+	}
+	ctx.restore();
 }
