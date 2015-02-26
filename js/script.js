@@ -35,13 +35,16 @@ function drawClock (ctx, x, y) {
 	ctx.moveTo(x + r - 5, y);
 	ctx.arc(x, y, r - 5, 0, 2 * Math.PI, false);
 
+	// translate to center
+	ctx.translate(x, y);
+
 	// draw minute hand
-	ctx.moveTo(x, y);
-	ctx.lineTo(x, y - r + 15);
+	ctx.moveTo(0, 0);
+	ctx.lineTo(0, - r + 15);
 
 	// draw hour hand
-	ctx.moveTo(x, y);
-	ctx.lineTo(x - r + 35, y);
+	ctx.moveTo(0, 0);
+	ctx.lineTo(- r + 45, 0);
 
 	// stroke the path
 	ctx.stroke();
