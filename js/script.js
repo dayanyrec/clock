@@ -1,14 +1,22 @@
 window.onload = function () {
-	var draw = document.getElementById('draw');
+	var draw = document.getElementById('draw'),
+		ctx;
 
-	if (draw.getContext) {
+	ctx = getCtx(draw);
 
-		var ctx = draw.getContext('2d');
+	setSize(draw);
+}
 
-		draw.width = document.body.clientWidth;
-
-		draw.height = document.body.clientHeight;
-
+function getCtx (canvas) {
+	if (!canvas.getContext) {
+		console.error('Your browser does not support the HTML5 <canvas>.');
+		return null;
 	}
 
+	return canvas.getContext('2d');
+}
+
+function setSize (canvas) {
+	canvas.width = document.body.clientWidth;
+	canvas.height = document.body.clientHeight;
 }
