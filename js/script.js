@@ -1,17 +1,24 @@
 window.onload = function () {
 	var draw = document.getElementById('draw'),
-		ctx;
+		ctx,
+		xClock,
+		yClock,
+		rClock;
 
 	ctx = getCtx(draw);
 	if (ctx === null) return;
 
 	setSize(draw);
 
-	drawClock(ctx, draw.width / 2, draw.height / 2);
+	xClock = draw.width / 2;
+	yClock = draw.height / 2;
+	rClock = xClock < yClock ? 0.7 * xClock : 0.7 * yClock;
+
+	drawClock(ctx, xClock, yClock, rClock);
 
 	setInterval(function () {
 		ctx.clearRect(0, 0, draw.width, draw.height);
-		drawClock(ctx, draw.width / 2, draw.height / 2);
+		drawClock(ctx, xClock, yClock, rClock);
 	}, 1000);
 
 }
@@ -30,9 +37,8 @@ function setSize (canvas) {
 	canvas.height = document.body.clientHeight;
 }
 
-function drawClock (ctx, x, y) {
-	var r = 0.7 * y,
-		numbersAngle = 2 * Math.PI / 12,
+function drawClock (ctx, x, y, r) {
+	var numbersAngle = 2 * Math.PI / 12,
 		hourAngle = numbersAngle,
 		minAngle = 2 * Math.PI / 60,
 		date = new Date();
