@@ -47,10 +47,6 @@ function drawClock (ctx, x, y, r) {
 	// draw outer circle
 	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
 
-	// draw inner circle
-	ctx.moveTo(x + r - 5, y);
-	ctx.arc(x, y, r - 5, 0, 2 * Math.PI, false);
-
 	ctx.save();
 
 	// translate to center
@@ -59,25 +55,26 @@ function drawClock (ctx, x, y, r) {
 	// draw seconds hand
 	ctx.save();
 	ctx.rotate(minAngle * date.getSeconds());
-	ctx.moveTo(0, 0);
-	ctx.lineTo(0, - r + 15);
+	ctx.moveTo(0, 20);
+	ctx.lineTo(0, - r + 30);
 	ctx.restore();
 
 	// draw minute hand
 	ctx.save();
 	ctx.rotate(minAngle * date.getMinutes());
-	ctx.moveTo(0, 0);
-	ctx.lineTo(0, - r + 15);
+	ctx.moveTo(0, 20);
+	ctx.lineTo(0, - r + 30);
 	ctx.restore();
 
 	// draw hour hand
 	ctx.save();
 	ctx.rotate(hourAngle * date.getHours());
-	ctx.moveTo(0, 0);
-	ctx.lineTo(0, - r + 65);
+	ctx.moveTo(0, 20);
+	ctx.lineTo(0, - r + 100);
 	ctx.restore();
 
 	// stroke the path
+	ctx.lineWidth = 5;
 	ctx.stroke();
 
 	// draw numbers
