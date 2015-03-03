@@ -43,7 +43,7 @@ function drawClock (ctx, x, y, r) {
 		minAngle = 2 * Math.PI / 60,
 		date = new Date();
 
-	document.body.style.backgroundColor = '#' + ("0" + date.getHours()).slice(-2) + ("0" + date.getMinutes()).slice(-2) + ("0" + date.getSeconds()).slice(-2);
+	document.body.style.backgroundColor = '#' + ((date.getTime()).toString()).slice(-6);
 
 	ctx.beginPath();
 	// draw outer circle
