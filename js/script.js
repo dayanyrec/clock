@@ -21,7 +21,7 @@ window.onload = function () {
 		drawClock(ctx, xClock, yClock, rClock);
 	}, 1000);
 
-}
+};
 
 function getCtx (canvas) {
 	if (!canvas.getContext) {
@@ -47,7 +47,15 @@ function drawClock (ctx, x, y, r) {
 
 	ctx.beginPath();
 	// draw outer circle
+	ctx.save();
+	ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+	ctx.lineWidth = 5;
 	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+	ctx.fill();
+	ctx.stroke();
+	ctx.restore();
+
+	ctx.beginPath();
 
 	ctx.save();
 
@@ -57,27 +65,29 @@ function drawClock (ctx, x, y, r) {
 	// draw seconds hand
 	ctx.save();
 	ctx.rotate(minAngle * date.getSeconds());
-	ctx.moveTo(0, 20);
+	ctx.moveTo(-2, 20);
 	ctx.lineTo(0, - r + 30);
+	ctx.lineTo(2, 20);
 	ctx.restore();
 
 	// draw minute hand
 	ctx.save();
 	ctx.rotate(minAngle * date.getMinutes());
-	ctx.moveTo(0, 20);
+	ctx.moveTo(-4, 20);
 	ctx.lineTo(0, - r + 30);
+	ctx.lineTo(4, 20);
 	ctx.restore();
 
 	// draw hour hand
 	ctx.save();
 	ctx.rotate(hourAngle * date.getHours());
-	ctx.moveTo(0, 20);
+	ctx.moveTo(-4, 20);
 	ctx.lineTo(0, - r + 100);
+	ctx.lineTo(4, 20);
 	ctx.restore();
 
-	// stroke the path
-	ctx.lineWidth = 5;
-	ctx.stroke();
+	// fill the path
+	ctx.fill();
 
 	// draw numbers
 	ctx.font = 'bold 14px Arial';
